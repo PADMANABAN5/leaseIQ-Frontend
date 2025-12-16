@@ -1,0 +1,75 @@
+import "../styles/landing.css";
+
+const Landing = () => {
+  return (
+    <div className="landing-page">
+      {/* Header */}
+      <div className="landing-header">
+        <h1>Welcome to LeaseIQ</h1>
+        <p>Choose how you'd like to get started</p>
+      </div>
+
+      {/* Cards */}
+      <div className="landing-cards">
+        {/* Left Card */}
+        <div className="landing-card">
+          <div className="icon-box blue">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3 21V3H21V21H3Z"
+                stroke="#5A3DF0"
+                strokeWidth="2"
+                fill="none"
+              />
+              <path d="M7 17V13H11V17H7Z" stroke="#5A3DF0" strokeWidth="2" />
+              <path d="M13 17V7H17V17H13Z" stroke="#5A3DF0" strokeWidth="2" />
+            </svg>
+          </div>
+
+          <h3>Build My Portfolio</h3>
+          <p>I want to organize my properties and track multiple leases</p>
+
+          <a href="#">Set Up Portfolio →</a>
+        </div>
+
+        {/* Right Card */}
+        <div className="landing-card">
+          <div className="icon-box purple">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13 2L3 14H11L9 22L21 10H13L13 2Z"
+                stroke="#8A2BE2"
+                strokeWidth="2"
+                fill="none"
+              />
+            </svg>
+          </div>
+
+          <h3>Quick Lease Analysis</h3>
+          <p>I just need to analyze one lease document right now</p>
+
+          <a href="#">Upload Lease →</a>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="landing-footer">
+        Need help? Contact support@leaseiq.com
+      </div>
+    </div>
+  );
+};
+
+export default Landing;
