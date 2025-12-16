@@ -1,10 +1,12 @@
 import { useState } from "react";
 import "../styles/addUnitSuite.css";
+import { useNavigate } from "react-router-dom";
 
 const AddUnitSuite = () => {
   const [unitNumber, setUnitNumber] = useState("");
   const [tenantName, setTenantName] = useState("");
   const [squareFootage, setSquareFootage] = useState("");
+  const navigate = useNavigate();
 
   // ALL fields must be filled
   const isFormValid =
@@ -80,7 +82,9 @@ const AddUnitSuite = () => {
           <div className="button-row">
             <button className="btn-skip">Skip</button>
 
-            <button className="btn-continue" disabled={!isFormValid}>
+            <button className="btn-continue" disabled={!isFormValid}
+            onClick={() => navigate("/upload-lease")}
+            >
               Continue →
             </button>
           </div>

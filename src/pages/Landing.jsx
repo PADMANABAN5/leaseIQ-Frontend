@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import "../styles/landing.css";
 
 const Landing = () => {
+  
+  const navigate = useNavigate();
+
   return (
     <div className="landing-page">
       {/* Header */}
@@ -10,7 +14,9 @@ const Landing = () => {
       </div>
 
       {/* Cards */}
-      <div className="landing-cards">
+      <div className="landing-cards"
+      onClick={() => navigate("/add-property")}
+  style={{ cursor: "pointer" }}>
         {/* Left Card */}
         <div className="landing-card">
           <div className="icon-box blue">

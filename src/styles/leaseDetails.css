@@ -1,7 +1,5 @@
 /* Lock full page scroll */
-body {
-  overflow: hidden;
-}
+
 
 /* Page */
 .lease-page {

@@ -1,4 +1,5 @@
 import "../styles/leaseDetails.css";
+
 import {
   FiArrowLeft,
   FiMessageSquare,

@@ -1,9 +1,13 @@
 import { useState } from "react";
 import "../styles/addProperty.css";
+import { useNavigate } from "react-router-dom";
+
 
 const AddProperty = () => {
   const [propertyName, setPropertyName] = useState("");
   const [address, setAddress] = useState("");
+
+  const navigate = useNavigate();
 
   // All fields must be filled
   const isFormValid = propertyName.trim() !== "" && address.trim() !== "";
@@ -66,7 +70,9 @@ const AddProperty = () => {
           <div className="button-row">
             <button className="btn-skip">Skip</button>
 
-            <button className="btn-continue" disabled={!isFormValid}>
+            <button className="btn-continue" disabled={!isFormValid}
+            onClick={() => navigate("/add-unit-suite")}
+            >
               Continue →
             </button>
           </div>

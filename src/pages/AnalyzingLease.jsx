@@ -41,7 +41,7 @@ const AnalyzingLease = () => {
     <div className="analyzing-page">
       <div className="analyzing-card">
         <h2>Analyzing your lease...</h2>
-        <p className="subtitle">
+        <p className="subtitle-analyzinglease">
           Our AI is extracting key information from your document
         </p>
 

@@ -1,4 +1,6 @@
 import "../styles/analysisSuccess.css";
+import { useNavigate } from "react-router-dom";
+
 import {
   FiCheckCircle,
   FiCalendar,
@@ -8,6 +10,10 @@ import {
 } from "react-icons/fi";
 
 const AnalysisSuccess = () => {
+
+  const navigate = useNavigate();
+
+
   return (
     <div className="success-page">
       <div className="success-card">
@@ -50,7 +56,7 @@ const AnalysisSuccess = () => {
         <button className="btn-primary">Go to Dashboard →</button>
 
         <div className="secondary-actions">
-          <button className="btn-secondary">View Lease Details</button>
+          <button className="btn-secondary" onClick={() => navigate("/lease-details")}>View Lease Details</button>
           <button className="btn-secondary">Add Another Unit</button>
         </div>
       </div>

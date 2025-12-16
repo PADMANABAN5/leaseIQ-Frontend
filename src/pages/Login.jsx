@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -19,6 +22,13 @@ const Login = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+      navigate("/landing");
+    }
+  };
+
   return (
     <div className="login-page">
       <div className="login-header">
@@ -29,7 +39,7 @@ const Login = () => {
       <div className="login-card">
         <h2 className="title">Sign In</h2>
 
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Label>Username/Email</Form.Label>
             <Form.Control
