@@ -53,7 +53,7 @@ const AnalysisSuccess = () => {
         </div>
 
         {/* Actions */}
-        <button className="btn-primary">Go to Dashboard →</button>
+        <button className="btn-primary" onClick={() => navigate("/dashboard")}>Go to Dashboard →</button>
 
         <div className="secondary-actions">
           <button className="btn-secondary" onClick={() => navigate("/lease-details")}>View Lease Details</button>

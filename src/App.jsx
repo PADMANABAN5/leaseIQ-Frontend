@@ -8,6 +8,7 @@ import AnalyzingLease from "./pages/AnalyzingLease";
 import AnalysisSuccess from "./pages/AnalysisSuccess";
 import LeaseDetails from "./pages/LeaseDetails";
 import Unit from "./pages/Unit";
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/analysis-success" element={<AnalysisSuccess />} />
         <Route path="/lease-details" element={<LeaseDetails />} />
         <Route path="/units" element={<Unit />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

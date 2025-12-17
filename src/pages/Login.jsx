@@ -1,19 +1,21 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
+import axios from "axios";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const Login = () => {
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+
 
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    organization: "",
   });
 
-  const isFormValid =
-    formData.username && formData.password && formData.organization;
+  const isFormValid = formData.username && formData.password;
 
   const handleChange = (e) => {
     setFormData({
@@ -22,12 +24,29 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (isFormValid) {
-      navigate("/landing");
-    }
-  };
+ const handleLogin = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await axios.post(
+      `${BASE_URL}/api/auth/login`,
+      {
+        email: formData.username,
+        password: formData.password
+      },
+      {
+        headers: { "Content-Type": "application/json" }
+      }
+    );
+
+    localStorage.setItem("token", res.data.token);
+
+    navigate("/landing");
+  } catch (err) {
+    setError(err.response?.data?.message || "Login failed");
+  }
+};
+
 
   return (
     <div className="login-page">
@@ -39,7 +58,9 @@ const Login = () => {
       <div className="login-card">
         <h2 className="title">Sign In</h2>
 
-        <Form onSubmit={handleSubmit}>
+        {error && <p className="error-message">{error}</p>}
+
+        <Form onSubmit={handleLogin}>
           <Form.Group className="mb-3">
             <Form.Label>Username/Email</Form.Label>
             <Form.Control
@@ -62,7 +83,7 @@ const Login = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-4">
+          {/* <Form.Group className="mb-4">
             <Form.Label>Organization Name</Form.Label>
             <Form.Control
               type="text"
@@ -71,7 +92,7 @@ const Login = () => {
               value={formData.organization}
               onChange={handleChange}
             />
-          </Form.Group>
+          </Form.Group> */}
 
           <Button className="login-btn" type="submit" disabled={!isFormValid}>
             Login

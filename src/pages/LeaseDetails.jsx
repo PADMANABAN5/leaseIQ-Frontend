@@ -9,14 +9,16 @@ import {
   FiEdit,
 } from "react-icons/fi";
 import { FiTrash2 } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const LeaseDetails = () => {
+  const navigate = useNavigate();
   return (
     <div className="lease-page">
       {/* ===== FIXED HEADER ===== */}
       <header className="lease-header">
         <div className="header-left">
-          <FiArrowLeft className="header-back" />
+          <FiArrowLeft className="header-back" onClick={() => navigate("/units")}/>
           <div className="header-text">
             <h1>Acme Corp - Lease Abstraction</h1>
             <p>Downtown Plaza · Suite 100</p>

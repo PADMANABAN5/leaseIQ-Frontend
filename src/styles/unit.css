@@ -1,206 +1,97 @@
-/* ===== PAGE ===== */
-.unit-page {
-  min-height: 100vh;
-  background: #f7f8fc;
-  padding: 24px 32px;
-  font-family: "Segoe UI", sans-serif;
+/* NAVBAR */
+.tenant-navbar {
+  background: #ffffff;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* ===== HEADER ===== */
-.unit-header {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 24px;
-}
-
-.back-text {
+/* Back link */
+.back-link {
   font-size: 14px;
-  color: #6b7280;
+  color: #374151;
   cursor: pointer;
 }
 
-.unit-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.unit-icon {
+/* Icon */
+.tenant-icon {
   width: 44px;
   height: 44px;
-  border-radius: 10px;
-  background: #6d5dfc;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6f42ff, #8f6bff);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 20px;
 }
 
-.unit-title h2 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.unit-title p {
-  margin: 2px 0 0;
-  font-size: 13px;
-  color: #6b7280;
-}
-
-/* ===== STATS ===== */
-.unit-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
-}
-
-.stat-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 18px;
-  border: 1px solid #eee;
-}
-
-.stat-card p {
-  font-size: 13px;
-  color: #6b7280;
-  margin: 0;
-}
-
-.stat-card h2 {
-  margin: 6px 0;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.stat-card span {
-  font-size: 12px;
-  color: #9ca3af;
-}
-
-/* ===== UNITS HEADER ===== */
-.units-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
-
-.units-header h3 {
-  margin: 0;
+/* Title */
+.tenant-title {
   font-size: 16px;
   font-weight: 600;
 }
 
+.tenant-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Page bg */
+.unit-page {
+  background-color: #f4f6fb;
+  min-height: 100vh;
+}
+
+/* Cards */
+.stat-card,
+.unit-card {
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+}
+
+.unit-card:hover {
+  border-color: #6366f1;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* Button */
 .add-unit-btn {
-  background: #6d5dfc;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 8px 14px;
-  font-size: 13px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #7b6cff, #d44fd6);
+  color: white;
+  border: none;
+}
+.stat-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  transition: all 0.25s ease;
 }
 
-/* ===== UNIT CARD ===== */
-.unit-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 18px 20px;
-  margin-bottom: 16px;
-  border: 1px solid #eee;
+.stat-card:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
 
-.unit-top {
+/* header row inside card */
+.stat-header {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-}
-
-.unit-top strong {
+  align-items: center;
+  margin-bottom: 12px;
   font-size: 14px;
-  font-weight: 600;
-}
-
-.unit-top p {
-  margin: 4px 0;
-  font-size: 13px;
   color: #374151;
 }
 
-.unit-top small {
-  font-size: 12px;
-  color: #6b7280;
+/* icon size */
+.stat-icon {
+  width: 20px;
+  height: 20px;
 }
 
-/* ===== BADGES ===== */
-.badge {
-  display: inline-block;
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-left: 8px;
-  font-weight: 500;
-}
-
-.badge.active {
-  background: #dcfce7;
-  color: #16a34a;
-}
-
-.badge.warning {
-  background: #fef3c7;
-  color: #d97706;
-}
-
-/* ===== RENT ===== */
-.rent {
-  text-align: right;
-}
-
-.rent strong {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.rent small {
-  display: block;
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 4px;
-}
-
-/* ===== DATES ===== */
-.unit-dates {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 14px;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1024px) {
-  .unit-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .unit-top {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .rent {
-    text-align: left;
-  }
+/* optional purple color */
+.text-purple {
+  color: #7c3aed;
 }
