@@ -57,7 +57,13 @@ const AnalysisSuccess = () => {
 
         <div className="secondary-actions">
           <button className="btn-secondary" onClick={() => navigate("/lease-details")}>View Lease Details</button>
-          <button className="btn-secondary">Add Another Unit</button>
+          <button
+  className="btn-secondary"
+  onClick={() => navigate("/add-unit-suite")}
+>
+  Add Another Unit
+</button>
+
         </div>
       </div>
     </div>

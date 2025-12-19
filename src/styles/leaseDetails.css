@@ -343,6 +343,616 @@ background: linear-gradient(to right, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, F
   font-size: 13px;
 }
 
+/* Section title */
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Accordion container */
+.accordion-card {
+  background: #fff;
+  border: 1px solid #e6e8ec;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+/* Hide default arrow */
+.accordion-card summary {
+  list-style: none;
+}
+.accordion-card summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Accordion header */
+.accordion-summary {
+  padding: 16px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove default marker */
+.accordion-summary::-webkit-details-marker {
+  display: none;
+}
+/* Left content (arrow + text) */
+.accordion-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Arrow icon */
+.accordion-icon {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+  color: #555;
+}
+
+
+/* Rotate arrow when open */
+details[open] .accordion-icon {
+  transform: rotate(180deg);
+}
+
+/* Custom arrow */
+.accordion-summary::after {
+  content: "⌃";
+  position: absolute;
+  right: 20px;
+  font-size: 16px;
+  color: #555;
+}
+details:not([open]) .accordion-summary::after {
+  content: "⌄";
+}
+
+/* Accordion body */
+.accordion-body {
+  padding: 20px;
+}
+
+/* Late fee cards grid */
+.latefee-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 18px;
+}
+
+/* Late fee card */
+.latefee-card {
+  background: #fafbfc;
+  border-left: 4px solid #6c5ce7;
+  border-radius: 10px;
+  padding: 12px 14px !important;
+}
+
+.latefee-card label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.latefee-card p {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+.citation {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Base rent card */
+.base-rent-card {
+  margin-top: 8px;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Table */
+.rent-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rent-table th {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.rent-table td {
+  font-size: 14px;
+  padding: 14px 12px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+
+/* ================= PROVISIONS ================= */
+
+.provisions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.provisions-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.btn-outline {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Category Card */
+.provision-card {
+  margin-bottom: 16px;
+}
+
+.provision-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.provision-header h4 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Right-side actions */
+.provision-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.text-btn {
+  background: none;
+  border: none;
+  color: #6c5ce7;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Icons */
+.icon {
+  cursor: pointer;
+}
+
+.icon.edit {
+  color: #6c5ce7;
+}
+
+.icon.delete {
+  color: #ef4444;
+}
+
+/* List */
+.provision-list {
+  list-style: disc;
+  padding-left: 18px;
+}
+
+.provision-item {
+  position: relative;
+  padding: 6px 40px 6px 0;
+  font-size: 14px;
+}
+
+/* Hover actions */
+.item-actions {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease;
+}
+
+.provision-item:hover .item-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.item-actions svg:first-child {
+  color: #6c5ce7;
+  cursor: pointer;
+}
+
+.item-actions svg:last-child {
+  color: #ef4444;
+  cursor: pointer;
+}
+
+
+/* ===== FIX ADD CATEGORY MODAL FOOTER ===== */
+
+/* ===== ADD CATEGORY MODAL FOOTER (RIGHT-ALIGNED BUTTONS) ===== */
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2px;
+  padding: 16px 20px;
+}
+
+/* Base button sizing */
+.modal-footer .btn {
+  width: auto;
+  min-width: auto;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* CANCEL button */
+.modal-footer .btn-secondary {
+  background: #ffffff;
+   flex: 0 0 auto; 
+  color: #111827;                
+  border: 1px solid #d1d5db;
+  padding: 8px 14px;              
+}
+
+/* Cancel hover (fix invisible text bug) */
+.modal-footer .btn-secondary:hover {
+  background: #f9fafb;
+  color: #111827;                 /* keep text visible */
+  border-color: #c7cdd8;
+}
+
+/* ADD CATEGORY button */
+.modal-footer .btn-primary {
+  background: #6d5dfc;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;             
+}
+
+.modal-footer .btn-primary:hover {
+  background: #5b4df0;
+}
+
+
+/* ===== AUDIT TAB ===== */
+
+.audit {
+  padding: 16px;
+}
+
+.audit-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.audit-title {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.audit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.audit-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.audit-item:last-child {
+  border-bottom: none;
+}
+
+.audit-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #111827;
+}
+
+.audit-chevron {
+  color: #9ca3af;
+}
+
+.audit-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.priority {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.priority.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.priority.medium {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+.count {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+
+/* CAM */
+.cam-overview {
+  margin-bottom: 16px;
+}
+
+/* Only Edit CAM Rule modal width */
+.cam-edit-modal {
+  max-width: 720px !important;  
+}
+
+
+.cam-card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.cam-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.cam-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cam-item {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.cam-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.cam-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cam-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cam-content {
+  padding: 16px;
+  border-left: 4px solid #6366f1;
+  background: #fafafa;
+  margin: 0 16px 16px 16px;
+  border-radius: 8px;
+}
+
+.cam-tags {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  background: #eef2ff;
+  color: #4f46e5;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* Status Pills */
+.status {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.status.purple { background: #ede9fe; color: #6d28d9; }
+.status.blue { background: #e0f2fe; color: #0369a1; }
+.status.green { background: #dcfce7; color: #15803d; }
+.status.orange { background: #ffedd5; color: #c2410c; }
+
+.modal-body {
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+/* ===== CAM SUMMARY ===== */
+.cam-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* Shared card styles */
+.cam-summary-card {
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+
+/* HEADERS */
+.cam-summary-card h4 {
+  margin-bottom: 14px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* LIST */
+.cam-summary-card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.cam-summary-card li {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* ===== GREEN (Key Tenant Protections) ===== */
+.cam-summary-card.green {
+  background: #eafaf0;
+}
+
+.cam-summary-card.green h4 {
+  color: #181818; 
+}
+
+.cam-summary-card.green li {
+  color: #181818; 
+}
+
+.cam-summary-card.green li::marker {
+  color: #16a34a; 
+}
+
+/* ===== ORANGE (Key Tenant Expenses) ===== */
+.cam-summary-card.orange {
+  background: #fff3e8;
+}
+
+.cam-summary-card.orange h4 {
+  color: #181818; /
+}
+
+.cam-summary-card.orange li {
+  color: #181818; 
+}
+
+.cam-summary-card.orange li::marker {
+  color: #ea580c; 
+}
+
+
+/* Upload modal width */
+.upload-modal {
+  max-width: 520px;
+}
+
+/* Subtitle */
+.modal-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Document type cards */
+.doc-type-grid {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.doc-type-card {
+  flex: 1;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 34px;
+  text-align: center;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.doc-type-card span {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.doc-type-card.active {
+  border-color: #6c5ce7;
+  background: #f4f3ff;
+  color: #6c5ce7;
+}
+
+/* Drop zone */
+.upload-dropzone {
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.upload-dropzone p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cam-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 /* Responsive */
 @media (max-width: 1024px) {
   .overview {
