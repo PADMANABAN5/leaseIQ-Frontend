@@ -9,6 +9,8 @@ import AnalysisSuccess from "./pages/AnalysisSuccess";
 import LeaseDetails from "./pages/LeaseDetails";
 import Unit from "./pages/Unit";
 import Dashboard from "./pages/Dashboard";
+import TenantDashboard from "./components/TenantDashboard";
+import QuickLeaseAnalysisCard from "./components/QuickLeaseAnalysisCard";
 
 
 function App() {
@@ -25,6 +27,9 @@ function App() {
         <Route path="/lease-details" element={<LeaseDetails />} />
         <Route path="/units" element={<Unit />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/tenant/:tenantName" element={<TenantDashboard />} />
+        <Route path="/quick-lease-analysis"element={<QuickLeaseAnalysisCard />}/>
+
       </Routes>
     </BrowserRouter>
   );

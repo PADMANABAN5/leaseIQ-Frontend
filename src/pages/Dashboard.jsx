@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Card, Button, Form, InputGroup, Badge,Navbar,} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/dashboard.css";
+import AddUnit from "../components/AddUnit";
+import AddTenant from "../components/AddTenant";
 import {Home, Plus,CalendarDays, Users, DollarSign, AlertCircle, Building } from "lucide-react";
 
 const leases = [
@@ -43,6 +46,10 @@ const leases = [
 ];
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const [showAddUnit, setShowAddUnit] = useState(false);
+  const [showAddTenant, setShowAddTenant] = useState(false);
+
   return (
     <>
     <Navbar bg="white" className="dashboard-navbar">
@@ -51,7 +58,13 @@ const Dashboard = () => {
          <Home /> <span>Sage Portfolio</span>
       </Navbar.Brand>
 
-      <Button variant="outline-primary"><Plus /> Add Unit</Button>
+      <Button
+        variant="outline-primary"
+        onClick={() => setShowAddUnit(true)}
+      >
+        <Plus size={16} /> Add Unit
+      </Button>
+
      </Container>
      </Navbar>
     <Container fluid className="p-4 dashboard-container">
@@ -197,14 +210,21 @@ const Dashboard = () => {
           <InputGroup style={{ maxWidth: "260px" }}>
             <Form.Control placeholder="Search tenants..." />
           </InputGroup>
-            <button className="add-unit-btn">
-                        <Plus size={16} /> Add Unit
-                      </button>
-                  
+            <button
+              className="add-unit-btn"
+              onClick={() => setShowAddTenant(true)}
+            >
+              <Plus size={16} /> Add Tenant
+            </button>
         </Col>
       </Row>
       {leases.map((lease, idx) => (
-        <Card key={idx} className="mb-3 shadow-sm lease-card">
+        <Card
+          key={idx}
+          className="mb-3 shadow-sm lease-card"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate(`/tenant/${lease.name}`)}
+        >
           <Card.Body>
             <Row className="align-items-center">
               
@@ -246,6 +266,12 @@ const Dashboard = () => {
       ))}
 
     </Container>
+     {showAddUnit && (
+      <AddUnit onClose={() => setShowAddUnit(false)} />
+    )}
+    {showAddTenant && (
+      <AddTenant onClose={() => setShowAddTenant(false)} />
+    )}
     </>
   );
 };

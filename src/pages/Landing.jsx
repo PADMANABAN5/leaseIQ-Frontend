@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/landing.css";
 
+
 const Landing = () => {
   
   const navigate = useNavigate();
@@ -15,8 +16,7 @@ const Landing = () => {
 
       {/* Cards */}
       <div className="landing-cards"
-      onClick={() => navigate("/add-property")}
-  style={{ cursor: "pointer" }}>
+          style={{ cursor: "pointer" }}>
         {/* Left Card */}
         <div className="landing-card">
           <div className="icon-box blue">
@@ -41,7 +41,16 @@ const Landing = () => {
           <h3>Build My Portfolio</h3>
           <p>I want to organize my properties and track multiple leases</p>
 
-          <a href="#">Set Up Portfolio →</a>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/add-property");
+            }}
+          >
+            Set Up Portfolio →
+          </a>
+
         </div>
 
         {/* Right Card */}
@@ -66,7 +75,16 @@ const Landing = () => {
           <h3>Quick Lease Analysis</h3>
           <p>I just need to analyze one lease document right now</p>
 
-          <a href="#">Upload Lease →</a>
+          <a
+  href="#"
+  onClick={(e) => {
+    e.preventDefault();
+    navigate("/quick-lease-analysis");
+  }}
+>
+  Upload Lease →
+</a>
+
         </div>
       </div>
 

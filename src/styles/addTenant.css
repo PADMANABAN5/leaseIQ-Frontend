@@ -1,0 +1,17 @@
+.add-tenant-page {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 1050;
+}
+
+.add-tenant-card {
+  width: 420px;
+  border-radius: 12px;
+}
+
+.add-tenant-submit {
+  background: linear-gradient(135deg, #8f6bff, #b18cff);
+  border: none;
+}

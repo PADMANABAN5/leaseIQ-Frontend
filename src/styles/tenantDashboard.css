@@ -1,0 +1,233 @@
+/* Page background */
+.tenant-dashboard {
+  background-color: #f8f9fb;
+  min-height: 100vh;
+}
+
+/* Tenant header */
+.tenant-title {
+  margin-bottom: 0;
+}
+
+.tenant-subtitle {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+/* KPI cards */
+.kpi-card {
+  border-radius: 12px;
+  border: 1px solid #e6e8ec;
+  padding: 1rem;
+}
+
+.kpi-card small {
+  color: #6c757d;
+}
+
+/* Units section header */
+.units-header h5 {
+  margin: 0;
+}
+
+.add-unit-btn {
+  display: inline-flex;       
+  align-items: center;
+  gap: 0.25rem;              
+  padding: 0.25rem 1.95rem;   
+  font-size: 1rem;        
+  min-width: 0;              
+  width: auto;                
+}
+
+/* Unit card */
+.unit-card {
+  border-radius: 12px;
+  border: 1px solid #e6e8ec;
+  padding: 0;  
+}
+
+.unit-card h6 {
+  margin-bottom: 4px;
+}
+
+/* Back button */
+.back-btn {
+  color: #6f42ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.leases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.unit-card {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
+}
+
+.unit-card-body {
+  padding: 12px 20px;     
+  display: flex;
+  flex-direction: column;
+  gap: 1px;                
+}
+.unit-header {
+  margin-bottom: 0px;
+}
+
+.unit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.unit-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; 
+}
+
+.building {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.address {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Header Row */
+.unit-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.unit-title h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.status-badge.active {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.expiring {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+/* Rent Section */
+.unit-rent small {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.unit-rent h6 {
+  margin: 4px 0 0;
+  font-weight: 600;
+}
+
+.unit-rent .sqft {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Location */
+
+.unit-location .building {
+  margin: 0;
+  font-weight: 500;
+}
+
+.unit-location .address {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Dates Row */
+.unit-dates {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* KPI header layout (title + icon) */
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Icon wrapper */
+.kpi-icon {
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+/* Icon color variants (match image) */
+.kpi-icon.purple {
+  color: #6f42ff;
+  background-color: #ede9fe;
+}
+
+.kpi-icon.green {
+  color: #16a34a;
+  background-color: #dcfce7;
+}
+
+.kpi-icon.blue {
+  color: #2563eb;
+  background-color: #dbeafe;
+}
+/* Tenant header layout */
+.tenant-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+/* Purple icon box */
+.tenant-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background-color: #6f42ff;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -15px;
+}
+
+

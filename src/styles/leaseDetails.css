@@ -876,7 +876,7 @@ details:not([open]) .accordion-summary::after {
 }
 
 .cam-summary-card.orange h4 {
-  color: #181818; /
+  color: #181818; 
 }
 
 .cam-summary-card.orange li {

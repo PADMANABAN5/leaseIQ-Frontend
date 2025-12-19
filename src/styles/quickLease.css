@@ -1,0 +1,143 @@
+/* =========================
+   Upload Card
+========================= */
+.upload-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.upload-card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #111827;
+}
+
+/* Subtitle */
+.subtitle-uploadlease {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 22px;
+}
+
+/* =========================
+   Upload Box
+========================= */
+.upload-box {
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 28px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.upload-box:hover {
+  border-color: #5a3df0;
+  background: #faf9ff;
+}
+
+/* Icon */
+.upload-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #f3f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+/* Upload text */
+.upload-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.upload-sub {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* =========================
+   Lease Name
+========================= */
+.lease-name {
+  margin-top: 18px;
+}
+
+.lease-name label {
+  display: block;
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.lease-name input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.lease-name input:focus {
+  outline: none;
+  border-color: #5a3df0;
+  box-shadow: 0 0 0 2px rgba(90, 61, 240, 0.15);
+}
+
+/* =========================
+   Buttons
+========================= */
+.button-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #e5e7eb;
+}
+
+/* Upload button */
+.btn-upload {
+  flex: 1;
+  background: #e5e7eb;
+  color: #9ca3af;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: not-allowed;
+  transition: all 0.2s ease;
+}
+
+.btn-upload.active {
+  background: #5a3df0;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.btn-upload.active:hover {
+  background: #4b32d4;
+}
