@@ -15,10 +15,10 @@ const AddUnitSuite = () => {
     squareFootage.trim() !== "";
 
   return (
-    <div className="add-unit-page">
+    <div className="add-unit-page-background">
       <div className="unit-wrapper">
         {/* Back */}
-        <div className="back-link">
+        <div className="back-link" onClick={() => navigate("/add-property")}>
           <svg
             width="16"
             height="16"

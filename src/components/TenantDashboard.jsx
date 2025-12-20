@@ -48,28 +48,32 @@ const TenantDashboard = () => {
 
 
   return (
+    <>
+     {/* NAVBAR / HEADER */}
+          <div className="tenant-navbar">
+            <Container fluid>
+              {/* Back */}
+              <div className="back-link d-flex align-items-center gap-2 mb-3" onClick={() => navigate("/dashboard")}>
+                <ArrowLeft size={16} />
+                <span>Back to Dashboard</span>
+              </div>
+    
+              {/* Title */}
+              <div className="d-flex align-items-center gap-3">
+                <div className="tenant-icon">
+                  <Building2 size={22} />
+                </div>
+                <div>
+                  <div className="tenant-title">{tenantName}</div>
+                  <div className="tenant-subtitle">Tenant Dashboard</div>
+                </div>
+              </div>
+            </Container>
+          </div>
+    
     <Container fluid className="tenant-dashboard p-4">
       
-      {/* BACK */}
-      <Button
-        variant="link"
-        className="back-btn mb-3"
-        onClick={() => navigate("/dashboard")}
-      >
-        <ArrowLeft size={16} /> Back to Dashboard
-      </Button>
-
-      {/* HEADER */}
-      <div className="tenant-header">
-        <div className="tenant-icon">
-            <Building2 size={20} />
-        </div>
-
-        <div>
-            <h4 className="tenant-title">{tenantName}</h4>
-            <p className="tenant-subtitle">Tenant Dashboard</p>
-        </div>
-      </div>
+      
 
       {/* KPI CARDS */}
       <Row className="mb-4">
@@ -188,6 +192,7 @@ const TenantDashboard = () => {
 
 
     </Container>
+    </>
     
   );
 };

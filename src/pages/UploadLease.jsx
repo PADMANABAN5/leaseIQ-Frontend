@@ -14,7 +14,7 @@ const UploadLease = () => {
     <div className="upload-lease-page">
       <div className="upload-wrapper">
         {/* Back */}
-        <div className="back-link">
+        <div className="back-link"onClick={() => navigate("/add-unit-suite")}>
           <svg
             width="16"
             height="16"
@@ -34,7 +34,7 @@ const UploadLease = () => {
         </div>
 
         {/* Card */}
-        <div className="upload-card">
+        <div className="upload-lease-card">
           <div className="step-text">Step 3 of 3</div>
 
           <h2>Upload Lease</h2>

@@ -16,7 +16,7 @@ const AddProperty = () => {
     <div className="add-property-page">
       <div className="property-wrapper">
         {/* Back */}
-        <div className="back-link">
+        <div className="back-link" onClick={() => navigate("/landing")}>
           <svg
             width="16"
             height="16"

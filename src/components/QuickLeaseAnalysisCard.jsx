@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import "../styles/quickLease.css";
 
 const QuickLeaseAnalysisCard = ({
-  file,
-  onFileChange,
+  //file,
+  //onFileChange,
   leaseName,
   onLeaseNameChange,
   onCancel,
-  onSubmit,
-  submitDisabled,
+  //onSubmit,
+  //submitDisabled,
 }) => {
     const navigate = useNavigate();
     const [uploadedFile, setUploadedFile] = useState(null);
@@ -17,7 +17,7 @@ const QuickLeaseAnalysisCard = ({
   return (
     <div className="quick-lease-page">
       {/* Back button */}
-      <div className="quick-lease-back" onClick={onCancel}>
+      <div className="quick-lease-back" onClick={() => navigate("/landing")}>
         ← Back
       </div>
 

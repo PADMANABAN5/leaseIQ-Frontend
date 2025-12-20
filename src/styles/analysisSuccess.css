@@ -7,7 +7,6 @@ background: linear-gradient(to right, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, F
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
   font-family: "Segoe UI", sans-serif;
 }
 
