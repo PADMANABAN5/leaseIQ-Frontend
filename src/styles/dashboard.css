@@ -91,3 +91,31 @@
   background-color: #f4f6fb; 
   min-height: 100vh;
 }
+/* MOBILE ONLY – FIX LEASE HEADER ALIGNMENT */
+@media (max-width: 576px) {
+
+  .lease-actions {
+    flex-direction: column;        
+    align-items: center;           
+    justify-content: center;
+    width: 100%;
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .lease-actions .input-group {
+    width: 90%;                    
+    max-width: 320px !important;
+  }
+
+  .lease-actions .add-unit-btn {
+    width: 90%;
+    max-width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;       
+    gap: 8px;
+  }
+}
+
+

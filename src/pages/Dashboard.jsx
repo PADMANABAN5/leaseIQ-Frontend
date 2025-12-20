@@ -71,12 +71,17 @@ const Dashboard = () => {
 
       {/* TITLE + FILTER */}
       <Row className="align-items-center mb-4">
-        <Col>
-          <h5>Upcoming Critical Items</h5>
+        <Col xs={12} md={6}>
+          <h5 className="mb-3 mb-md-0">Upcoming Critical Items</h5>
         </Col>
-        <Col className="text-end">
-          <Button variant="outline-primary" className="me-2">30 Days</Button>
-          <Button variant="outline-secondary" className="me-2">60 Days</Button>
+
+        <Col
+          xs={12}
+          md={6}
+          className="d-flex justify-content-start justify-content-md-end gap-2 flex-wrap"
+        >
+          <Button variant="outline-primary">30 Days</Button>
+          <Button variant="outline-secondary">60 Days</Button>
           <Button variant="outline-secondary">90 Days</Button>
         </Col>
       </Row>
@@ -206,7 +211,7 @@ const Dashboard = () => {
           <h4>Leases</h4>
         </Col>
 
-        <Col className="d-flex justify-content-end gap-3">
+        <Col className="d-flex justify-content-end gap-3 lease-actions">
           <InputGroup style={{ maxWidth: "260px" }}>
             <Form.Control placeholder="Search tenants..." />
           </InputGroup>
