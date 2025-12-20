@@ -1,0 +1,103 @@
+.ai-assistant-panel {
+  position: fixed;
+  top: 64px; /* below header */
+  right: 0;
+  width: 360px;
+  height: calc(100vh - 64px);
+  background: #ffffff;
+  border-left: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+}
+
+/* Header */
+.ai-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ai-header h4 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.close-icon {
+  cursor: pointer;
+}
+
+/* Credits */
+.ai-credits {
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: #16a34a;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Chat */
+.ai-chat {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.ai-message {
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 12px;
+  border-radius: 10px;
+  max-width: 90%;
+}
+
+.ai-bot {
+  background: #f3f4f6;
+}
+
+/* Input container */
+.ai-input {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-top: 1px solid #e5e7eb;
+  align-items: center;
+}
+
+/* SMALL input box */
+.ai-input .form-control {
+  flex: 0 0 260px;   
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 13px;
+  box-shadow: none;
+}
+
+/* Input focus */
+.ai-input .form-control:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.15);
+}
+
+/* LONG send button */
+.ai-input .btn {
+  flex: 0.7;                
+  background: #7c3aed;
+  border: none;
+  color: white;
+  padding: 12px 0;
+  border-radius: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 9px;
+}
+
+/* Hover */
+.ai-input .btn:hover {
+  background: #6d28d9;
+}

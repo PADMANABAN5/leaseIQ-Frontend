@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/analyzingLease.css";
 
 const steps = [
@@ -14,6 +14,9 @@ const AnalyzingLease = () => {
   const [progress, setProgress] = useState(34);
   const [activeStep, setActiveStep] = useState(2);
   const navigate = useNavigate();
+  const location = useLocation();
+  const source = location.state?.source; // "upload" | "quick"
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,7 +24,11 @@ const AnalyzingLease = () => {
         if (prev >= 100) {
           clearInterval(interval);
           setTimeout(() => {
-            navigate("/analysis-success");
+            if (source === "quick") {
+              navigate("/quick-analysis-info");
+            } else {
+              navigate("/analysis-success");
+            }
           }, 800);
           return 100;
         }

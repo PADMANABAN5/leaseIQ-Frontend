@@ -1,28 +1,66 @@
 /* =========================
+   Page Background
+========================= */
+.quick-lease-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6f6cff 0%, #f04fa3 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   Back Link
+========================= */
+.quick-lease-back {
+  color: #ffffff;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 24px 32px;
+  cursor: pointer;
+}
+
+.quick-lease-back:hover {
+  opacity: 0.85;
+}
+
+/* =========================
+   Center Wrapper
+========================= */
+.quick-lease-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* =========================
    Upload Card
 ========================= */
 .upload-card {
   background: #ffffff;
-  border-radius: 16px;
-  padding: 28px;
+  border-radius: 18px;
+  padding: 32px;
   width: 100%;
-  max-width: 460px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  max-width: 520px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
 /* Title */
 .upload-card h2 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 6px;
   color: #111827;
+  margin-bottom: 6px;
 }
 
 /* Subtitle */
 .subtitle-uploadlease {
   font-size: 14px;
   color: #6b7280;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 /* =========================
@@ -30,8 +68,8 @@
 ========================= */
 .upload-box {
   border: 2px dashed #d1d5db;
-  border-radius: 12px;
-  padding: 28px 16px;
+  border-radius: 14px;
+  padding: 36px 20px;
   text-align: center;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -42,16 +80,16 @@
   background: #faf9ff;
 }
 
-/* Icon */
+/* Upload Icon */
 .upload-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
   background: #f3f0ff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 12px;
+  margin: 0 auto 14px;
 }
 
 /* Upload text */
@@ -71,7 +109,7 @@
    Lease Name
 ========================= */
 .lease-name {
-  margin-top: 18px;
+  margin-top: 20px;
 }
 
 .lease-name label {
@@ -83,16 +121,16 @@
 
 .lease-name input {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #f3f4f6;
   font-size: 14px;
 }
 
 .lease-name input:focus {
   outline: none;
-  border-color: #5a3df0;
-  box-shadow: 0 0 0 2px rgba(90, 61, 240, 0.15);
+  box-shadow: 0 0 0 2px rgba(90, 61, 240, 0.2);
 }
 
 /* =========================
@@ -100,44 +138,67 @@
 ========================= */
 .button-row {
   display: flex;
-  gap: 12px;
-  margin-top: 24px;
+  gap: 14px;
+  margin-top: 28px;
 }
 
 .btn-cancel {
   flex: 1;
-  background: #f3f4f6;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   color: #374151;
-  border: none;
-  padding: 10px 14px;
+  padding: 12px;
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
 }
 
 .btn-cancel:hover {
-  background: #e5e7eb;
+  background: #f9fafb;
 }
 
-/* Upload button */
 .btn-upload {
   flex: 1;
-  background: #e5e7eb;
-  color: #9ca3af;
+  background: linear-gradient(90deg, #c084fc, #f472b6);
+  color: #ffffff;
   border: none;
-  padding: 10px 14px;
+  padding: 12px;
   border-radius: 10px;
   font-size: 14px;
-  cursor: not-allowed;
-  transition: all 0.2s ease;
-}
-
-.btn-upload.active {
-  background: #5a3df0;
-  color: #ffffff;
   cursor: pointer;
 }
 
-.btn-upload.active:hover {
-  background: #4b32d4;
+.btn-upload:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Full page background */
+.quick-lease-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6f6cff 0%, #f04fa3 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Back button */
+.quick-lease-back {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 24px 32px;
+  cursor: pointer;
+}
+
+.quick-lease-back:hover {
+  opacity: 0.85;
+}
+
+/* Center card */
+.quick-lease-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
