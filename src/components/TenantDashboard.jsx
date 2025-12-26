@@ -3,7 +3,8 @@ import {Building2,MapPin,DollarSign,TrendingUp} from "lucide-react";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import { ArrowLeft, Plus } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom"
-import AddUnit from "../components/AddUnit";;
+import AddUnit from "../components/AddUnit";
+import FloatingSignOut from "./FloatingSingout";
 import "../styles/tenantDashboard.css";
 
 const TenantDashboard = () => {
@@ -51,6 +52,7 @@ const TenantDashboard = () => {
     <>
      {/* NAVBAR / HEADER */}
           <div className="tenant-navbar">
+            <FloatingSignOut />
             <Container fluid>
               {/* Back */}
               <div className="back-link d-flex align-items-center gap-2 mb-3" onClick={() => navigate("/dashboard")}>

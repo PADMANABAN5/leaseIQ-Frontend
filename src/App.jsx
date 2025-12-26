@@ -13,6 +13,8 @@ import TenantDashboard from "./components/TenantDashboard";
 import QuickLeaseAnalysisCard from "./components/QuickLeaseAnalysisCard";
 import QuickAnalysisInfo from "./components/QuickAnalysisInfo";
 import AiLeaseAssistant from "./components/AiLeaseAssistant";
+import BuildPortfolo from "./pages/BuildPortfolio";
+import Signup from "./pages/Signup";
 
 
 
@@ -21,6 +23,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/add-property" element={<AddProperty />} />
         <Route path="/add-unit-suite" element={<AddUnitSuite />} />
@@ -34,6 +37,7 @@ function App() {
         <Route path="/quick-lease-analysis"element={<QuickLeaseAnalysisCard />}/>
         <Route  path="/quick-analysis-info"  element={<QuickAnalysisInfo />}/>
         <Route path="/ai-lease-assistant" element={<AiLeaseAssistant />} />
+        <Route path="/build-portfolio" element={<BuildPortfolo />} />
 
       </Routes>
     </BrowserRouter>

@@ -1,6 +1,7 @@
 import React,{ useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import {Eye, EyeOff} from "lucide-react";
 import "../styles/login.css";
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -8,14 +9,16 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
 
   const [formData, setFormData] = useState({
+    email: "",
     username: "",
     password: "",
   });
 
-  const isFormValid = formData.username && formData.password;
+  const isFormValid = (formData.username.trim() || formData.email.trim()) && formData.password.trim();
 
   const handleChange = (e) => {
     setFormData({
@@ -31,7 +34,8 @@ const Login = () => {
     const res = await axios.post(
       `${BASE_URL}/api/auth/login`,
       {
-        email: formData.username,
+        email: formData.email,
+        username: formData.username,
         password: formData.password
       },
       {
@@ -39,7 +43,7 @@ const Login = () => {
       }
     );
 
-    localStorage.setItem("token", res.data.token);
+    sessionStorage.setItem("token", res.data.token);
 
     navigate("/landing");
   } catch (err) {
@@ -56,7 +60,7 @@ const Login = () => {
       </div>
 
       <div className="login-card">
-        <h2 className="title">Sign In</h2>
+        <h2 className="title text-center">Sign In</h2>
 
         {error && <p className="error-message">{error}</p>}
 
@@ -73,15 +77,26 @@ const Login = () => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </Form.Group>
+  <Form.Label>Password</Form.Label>
+
+  <InputGroup>
+    <Form.Control
+      type={showPassword ? "text" : "password"}
+      name="password"
+      placeholder="Enter your password"
+      value={formData.password}
+      onChange={handleChange}
+    />
+
+    <InputGroup.Text
+      style={{ cursor: "pointer" }}
+      onClick={() => setShowPassword(!showPassword)}
+    >
+      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+    </InputGroup.Text>
+  </InputGroup>
+</Form.Group>
+
 
           {/* <Form.Group className="mb-4">
             <Form.Label>Organization Name</Form.Label>
@@ -97,6 +112,12 @@ const Login = () => {
           <Button className="login-btn" type="submit" disabled={!isFormValid}>
             Login
           </Button>
+          <div className="signup-link mt-3 text-center" >
+            <p>
+              Don't have an account?{" "}
+              <span className="text-primary sign-up" onClick={() => navigate("/signup")}>Sign Up</span>
+            </p>
+          </div>
         </Form>
       </div>
 

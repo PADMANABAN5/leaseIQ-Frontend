@@ -1,24 +1,29 @@
 import { useState } from "react";
 import "../styles/addUnitSuite.css";
-import { useNavigate } from "react-router-dom";
 
-const AddUnitSuite = () => {
-  const [unitNumber, setUnitNumber] = useState("");
-  const [tenantName, setTenantName] = useState("");
-  const [squareFootage, setSquareFootage] = useState("");
-  const navigate = useNavigate();
+const AddUnitSuite = ({ data, setData, onBack, onNext }) => {
+  const [unitNumber, setUnitNumber] = useState(data.unitNumber || "");
+  const [tenantName, setTenantName] = useState(data.tenantName || "");
+  const [squareFootage, setSquareFootage] = useState(data.squareFootage || "");
 
-  // ALL fields must be filled
-  const isFormValid =
-    unitNumber.trim() !== "" &&
-    tenantName.trim() !== "" &&
-    squareFootage.trim() !== "";
+  // ALL required fields validation (same logic as before)
+  const isFormValid = unitNumber.trim() !== "" && tenantName.trim() !== "";
+  const handleContinue = () => {
+    setData({
+      unitNumber,
+      tenantName,
+      squareFootage,
+    });
+
+    onNext(); // move to Step 3
+  };
 
   return (
     <div className="add-unit-page-background">
       <div className="unit-wrapper">
+
         {/* Back */}
-        <div className="back-link" onClick={() => navigate("/add-property")}>
+        <div className="back-link" onClick={onBack}>
           <svg
             width="16"
             height="16"
@@ -44,7 +49,7 @@ const AddUnitSuite = () => {
 
           <h2>Add Unit/Suite</h2>
           <p className="subtitle-addunitsuite">
-            Add a unit or suite to <strong>dwsdwq</strong>
+            Add a unit or suite
           </p>
 
           <div className="form-group">
@@ -60,7 +65,7 @@ const AddUnitSuite = () => {
           </div>
 
           <div className="form-group">
-            <label>Tenant Name</label>
+            <label>Tenant Name <span>*</span></label>
             <input
               type="text"
               value={tenantName}
@@ -80,10 +85,10 @@ const AddUnitSuite = () => {
           </div>
 
           <div className="button-row">
-            <button className="btn-skip">Skip</button>
-
-            <button className="btn-continue" disabled={!isFormValid}
-            onClick={() => navigate("/upload-lease")}
+            <button
+              className="btn-continue"
+              disabled={!isFormValid}
+              onClick={handleContinue}
             >
               Continue →
             </button>

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/landing.css";
+import FloatingSignOut from "../components/FloatingSingout";
 
 
 const Landing = () => {
@@ -8,7 +9,7 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
-      {/* Header */}
+      <FloatingSignOut />
       <div className="landing-header">
         <h1>Welcome to LeaseIQ</h1>
         <p>Choose how you'd like to get started</p>
@@ -45,7 +46,7 @@ const Landing = () => {
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              navigate("/add-property");
+              navigate("/build-portfolio");
             }}
           >
             Set Up Portfolio →

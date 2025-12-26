@@ -19,7 +19,7 @@ const LeaseDetails = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Info");
   const [showAiAssistant, setShowAiAssistant] = useState(false);
-  const [showUploadModal, setShowUploadModal] = useState(false);
+ // const [showUploadModal, setShowUploadModal] = useState(false);
 
 
   return (
@@ -59,7 +59,7 @@ const LeaseDetails = () => {
 
           <div
             className="upload-box"
-            onClick={() => setShowUploadModal(true)}
+           // onClick={() => setShowUploadModal(true)}
           >
             <FiUpload />
             <p>Drop PDF here or click to upload</p>

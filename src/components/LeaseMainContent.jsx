@@ -12,7 +12,6 @@ import {
 
 const LeaseMainContent = ({ activeTab, setActiveTab }) => {
 
-  const [lateFeeOpen, setLateFeeOpen] = useState(true);
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [showAddItem, setShowAddItem] = useState(false);
   const [showEditCategory, setShowEditCategory] = useState(false);

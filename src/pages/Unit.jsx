@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap";
 import { ArrowLeft, Building, Plus, CalendarDays, MapPin, DollarSign,TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import FloatingSignOut from "../components/FloatingSingout";
 import "../styles/unit.css";
 
 const getStatusVariant = (status) => {
@@ -29,6 +30,7 @@ const Unit = () => {
     <>
       {/* NAVBAR / HEADER */}
       <div className="tenant-navbar">
+        <FloatingSignOut />
         <Container fluid>
           {/* Back */}
           <div className="back-link d-flex align-items-center gap-2 mb-3" onClick={() => navigate("/dashboard")}>

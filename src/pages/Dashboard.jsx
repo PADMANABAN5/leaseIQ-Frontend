@@ -6,6 +6,7 @@ import "../styles/dashboard.css";
 import AddUnit from "../components/AddUnit";
 import AddTenant from "../components/AddTenant";
 import {Home, Plus,CalendarDays, Users, DollarSign, AlertCircle, Building } from "lucide-react";
+import FloatingSignOut from "../components/FloatingSingout";
 
 const leases = [
   {
@@ -53,6 +54,7 @@ const Dashboard = () => {
   return (
     <>
     <Navbar bg="white" className="dashboard-navbar">
+      <FloatingSignOut />
      <Container fluid>
       <Navbar.Brand className="d-flex align-items-center gap-2">
          <Home /> <span>Sage Portfolio</span>
@@ -64,7 +66,8 @@ const Dashboard = () => {
       >
         <Plus size={16} /> Add Unit
       </Button>
-
+       <AddUnit show={showAddUnit}
+       onClose={() => setShowAddUnit(false)}/>
      </Container>
      </Navbar>
     <Container fluid className="p-4 dashboard-container">
@@ -215,12 +218,12 @@ const Dashboard = () => {
           <InputGroup style={{ maxWidth: "260px" }}>
             <Form.Control placeholder="Search tenants..." />
           </InputGroup>
-            <button
+            {/* <button
               className="add-unit-btn"
               onClick={() => setShowAddTenant(true)}
             >
               <Plus size={16} /> Add Tenant
-            </button>
+            </button> */}
         </Col>
       </Row>
       {leases.map((lease, idx) => (

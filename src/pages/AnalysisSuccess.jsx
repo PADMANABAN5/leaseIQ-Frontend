@@ -8,6 +8,7 @@ import {
   FiFileText,
   FiHome,
 } from "react-icons/fi";
+import FloatingSignOut from "../components/FloatingSingout";
 
 const AnalysisSuccess = () => {
 
@@ -16,6 +17,7 @@ const AnalysisSuccess = () => {
 
   return (
     <div className="success-page">
+      <FloatingSignOut />
       <div className="success-card">
         {/* Success Icon */}
         <div className="success-icon">
@@ -23,7 +25,7 @@ const AnalysisSuccess = () => {
         </div>
 
         <h2>Lease Analyzed Successfully!</h2>
-        <p className="success-subtitle">rer - ewr</p>
+        <p className="success-subtitle"></p>
 
         {/* Stats */}
         <div className="stats-grid">
@@ -50,19 +52,11 @@ const AnalysisSuccess = () => {
             <h3>4</h3>
             <p>CAM provisions found</p>
           </div>
-        </div>
-
-        {/* Actions */}
-        <button className="btn-primary" onClick={() => navigate("/dashboard")}>Go to Dashboard →</button>
+        </div>        
 
         <div className="secondary-actions">
           <button className="btn-secondary" onClick={() => navigate("/lease-details")}>View Lease Details</button>
-          <button
-  className="btn-secondary"
-  onClick={() => navigate("/add-unit-suite")}
->
-  Add Another Unit
-</button>
+          <button className="btn-secondary" onClick={() => navigate("/dashboard")}>Go to Dashboard →</button>
 
         </div>
       </div>

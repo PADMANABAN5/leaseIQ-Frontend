@@ -2,20 +2,24 @@ import { useState } from "react";
 import "../styles/addProperty.css";
 import { useNavigate } from "react-router-dom";
 
-
-const AddProperty = () => {
-  const [propertyName, setPropertyName] = useState("");
-  const [address, setAddress] = useState("");
-
+const AddProperty = ({ data, setData, onNext }) => {
+  const [propertyName, setPropertyName] = useState(data.propertyName || "");
+  const [address, setAddress] = useState(data.address || "");
+  const isFormValid = propertyName.trim() !== "";
   const navigate = useNavigate();
+ 
+  const handleContinue = () => {
+    setData({
+      propertyName,
+      address,
+    });
 
-  // All fields must be filled
-  const isFormValid = propertyName.trim() !== "" && address.trim() !== "";
+    onNext(); 
+  };
 
   return (
     <div className="add-property-page">
       <div className="property-wrapper">
-        {/* Back */}
         <div className="back-link" onClick={() => navigate("/landing")}>
           <svg
             width="16"
@@ -35,8 +39,6 @@ const AddProperty = () => {
           </svg>
           <span>Back</span>
         </div>
-
-        {/* Card */}
         <div className="property-card">
           <div className="step-text">Step 1 of 3</div>
 
@@ -54,6 +56,7 @@ const AddProperty = () => {
               value={propertyName}
               onChange={(e) => setPropertyName(e.target.value)}
               placeholder="e.g., Downtown Plaza, Main Street Building"
+              required
             />
           </div>
 
@@ -68,10 +71,10 @@ const AddProperty = () => {
           </div>
 
           <div className="button-row">
-            <button className="btn-skip">Skip</button>
-
-            <button className="btn-continue" disabled={!isFormValid}
-            onClick={() => navigate("/add-unit-suite")}
+            <button
+              className="btn-continue"
+              disabled={!isFormValid}
+              onClick={handleContinue}
             >
               Continue →
             </button>
