@@ -8,6 +8,7 @@ const LEASE_ANALYSIS_STEPS = [
   { key: "space", endpoint: "/api/debug/space" },
   { key: "charge-schedules", endpoint: "/api/debug/charge-schedules" },
   { key: "misc", endpoint: "/api/debug/misc" },
+  {key: "audit", endpoint: "/api/debug/audit"}
 ];
 
 export const useLeaseAnalyzer = () => {

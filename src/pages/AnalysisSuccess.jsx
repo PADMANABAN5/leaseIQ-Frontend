@@ -1,6 +1,5 @@
 import "../styles/analysisSuccess.css";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   FiCheckCircle,
   FiCalendar,
@@ -11,23 +10,22 @@ import {
 import FloatingSignOut from "../components/FloatingSingout";
 
 const AnalysisSuccess = () => {
-
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const leaseId = location.state?.leaseId;
 
   return (
     <div className="success-page">
       <FloatingSignOut />
+
       <div className="success-card">
-        {/* Success Icon */}
         <div className="success-icon">
           <FiCheckCircle size={28} />
         </div>
 
         <h2>Lease Analyzed Successfully!</h2>
-        <p className="success-subtitle"></p>
 
-        {/* Stats */}
         <div className="stats-grid">
           <div className="stat-box blue">
             <FiCalendar className="stat-icon" />
@@ -52,12 +50,23 @@ const AnalysisSuccess = () => {
             <h3>4</h3>
             <p>CAM provisions found</p>
           </div>
-        </div>        
+        </div>
 
         <div className="secondary-actions">
-          <button className="btn-secondary" onClick={() => navigate("/lease-details")}>View Lease Details</button>
-          <button className="btn-secondary" onClick={() => navigate("/dashboard")}>Go to Dashboard →</button>
+          <button
+            className="btn-secondary"
+            disabled={!leaseId}
+            onClick={() => navigate(`/lease-details/${leaseId}`)}
+          >
+            View Lease Details
+          </button>
 
+          <button
+            className="btn-secondary"
+            onClick={() => navigate("/dashboard")}
+          >
+            Go to Dashboard →
+          </button>
         </div>
       </div>
     </div>

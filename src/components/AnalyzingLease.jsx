@@ -8,6 +8,7 @@ const steps = [
   "Extracting key dates...",
   "Identifying rent schedules...",
   "Finding CAM provisions...",
+  "Running audit checks...",
 ];
 
 const AnalyzingLease = ({ activeStep = 0 }) => {

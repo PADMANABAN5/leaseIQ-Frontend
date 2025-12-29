@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { showSuccess,showError } from "../service/toast.js";
+import api from "../service/api.js";
 
 import FloatingSignOut from "../components/FloatingSingout.jsx";
 import AddPropertyStep from "../components/AddProperty.jsx";
@@ -52,7 +53,7 @@ const BuildPortfolio = () => {
     );
     portfolioForm.append("assets", file);
 
-    await axios.post(
+    const res = await api.post(
       `${BASE_URL}/api/portfolio/`,
       portfolioForm,
       {
@@ -62,11 +63,12 @@ const BuildPortfolio = () => {
         },
       }
     );
-
-    navigate("/analysis-success");
+    const leaseId = res.data?.data?.lease_id;
+    showSuccess("Portfolio created successfully!");
+    navigate("/analysis-success",{ state: { leaseId } });
   } catch (err) {
     console.error(err);
-    alert("Lease analysis failed");
+    showError("Lease analysis failed");
     setStep(3);
   } finally {
     setLoading(false);

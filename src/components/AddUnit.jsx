@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Modal, Row, Col } from "react-bootstrap";
-import axios from "axios";
+import api from "../service/api";
 import "../styles/addUnit.css";
 import { useLeaseAnalyzer } from "../service/useLeaseAnalyzer";
+import { showError, showSuccess } from "../service/toast";
 
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const AddUnit = ({ show, onClose }) => {
+const AddUnit = ({ show, onClose,onSuccess, tenantName=" ", tenantId }) => {
   const token = sessionStorage.getItem("token");
   const { runLeaseAnalysis } = useLeaseAnalyzer();
 
@@ -19,7 +20,7 @@ const AddUnit = ({ show, onClose }) => {
     property_id: "",
     property_name: "",
     address: "",
-    tenant_name: "",
+    tenant_name:  tenantName || "",
     unit_number: "",
     square_ft: "",
     monthly_rent: "",
@@ -27,13 +28,12 @@ const AddUnit = ({ show, onClose }) => {
 
   const [loading, setLoading] = useState(false);
 
-  /* ---------- FETCH PROPERTIES ---------- */
   useEffect(() => {
     if (show) fetchProperties();
   }, [show]);
 
   const fetchProperties = async () => {
-    const res = await axios.get(`${BASE_URL}/api/properties`, {
+    const res = await api.get(`${BASE_URL}/api/properties`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setProperties(res.data.data || []);
@@ -64,8 +64,11 @@ const AddUnit = ({ show, onClose }) => {
       payload.append("unit_number", form.unit_number);
       payload.append("square_ft", form.square_ft);
       payload.append("monthly_rent", form.monthly_rent);
-      payload.append("tenant_name", form.tenant_name);
-
+      if (tenantId) {
+        payload.append("tenant_id", tenantId); // ✅ EXISTING TENANT
+      } else {
+        payload.append("tenant_name", form.tenant_name); // ✅ NEW TENANT
+      }
       // property
       if (useExistingProperty) {
         payload.append("property_id", form.property_id);
@@ -79,7 +82,7 @@ const AddUnit = ({ show, onClose }) => {
       payload.append("lease_details", JSON.stringify(leaseDetails));
       payload.append("assets", document);    
 
-      await axios.post(
+      await api.post(
         `${BASE_URL}/api/units/with-lease`,
         payload,
         {
@@ -90,10 +93,11 @@ const AddUnit = ({ show, onClose }) => {
         }
       );
 
-      alert("Unit, tenant, and lease created successfully");
+      showSuccess("created successfully");
+      onSuccess();
       onClose();
     } catch (err) {
-      alert(err.response?.data?.error || "Something went wrong");
+      showError(err.response?.data?.error || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -168,10 +172,15 @@ const AddUnit = ({ show, onClose }) => {
               <Form.Group className="mb-3">
                 <Form.Label>Tenant Name</Form.Label>
                 <Form.Control
-                  name="tenant_name"
+                  type="text"
                   placeholder="Enter tenant name"
-                  onChange={handleChange}
+                  value={form.tenant_name}
+                  disabled={Boolean(tenantId)}   // 🔒 IMPORTANT
+                  onChange={(e) =>
+                    setForm({ ...form, tenant_name: e.target.value })
+                  }
                 />
+
               </Form.Group>
             </Col>
           </Row>
@@ -194,6 +203,7 @@ const AddUnit = ({ show, onClose }) => {
               <Form.Group className="mb-3">
                 <Form.Label>Square Feet</Form.Label>
                 <Form.Control
+                  type="number"
                   name="square_ft"
                   onChange={handleChange}
                 />
@@ -204,6 +214,7 @@ const AddUnit = ({ show, onClose }) => {
               <Form.Group className="mb-3">
                 <Form.Label>Monthly Rent</Form.Label>
                 <Form.Control
+                  type="number"
                   name="monthly_rent"
                   onChange={handleChange}
                 />

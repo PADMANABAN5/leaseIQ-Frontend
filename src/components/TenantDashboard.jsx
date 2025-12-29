@@ -1,51 +1,56 @@
-import React from "react";
+import React, {useEffect, useState, useCallback} from "react";
 import {Building2,MapPin,DollarSign,TrendingUp} from "lucide-react";
 import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 import { ArrowLeft, Plus } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams, useLocation } from "react-router-dom"
 import AddUnit from "../components/AddUnit";
 import FloatingSignOut from "./FloatingSingout";
+import api from "../service/api";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import "../styles/tenantDashboard.css";
 
 const TenantDashboard = () => {
   const navigate = useNavigate();
-  const { tenantName } = useParams();
+  const location = useLocation();
+  const { tenantId } = useParams();
+  const tenantName = location.state?.tenantName;
   const [showAddUnit, setShowAddUnit] = React.useState(false);
+  const [leases, setLeases] = useState([]);
+  const token = sessionStorage.getItem("token");
+
+  const fetchLeases = useCallback(async () => {
+    if (!tenantId) return;
+
+    const res = await api.get(
+      `${BASE_URL}/api/tenants/${tenantId}/leases`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setLeases(Array.isArray(res.data?.leases) ? res.data.leases : []);
+  }, [tenantId, token]);
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    fetchLeases();
+  }, [fetchLeases]);
+
+  const totalMonthlyRent = leases.reduce(
+    (sum, lease) => sum + Number(lease.monthly_rent || 0),
+    0
+  );
+
+  const totalSqFt = leases.reduce(
+    (sum, lease) => sum + Number(lease.sqft || 0),
+    0
+  );
+
+  const avgRentPerSqFt = totalSqFt > 0 ? totalMonthlyRent / totalSqFt : 0;
 
 
-  // Replace the single hardcoded card with this leases array
-  const leases = [
-  {
-    unit: "Unit 101",
-    status: "Active",
-    building: "Downtown Plaza",
-    address: "123 Main St, Suite 101, New York, NY 10001",
-    startDate: "2023-01-01",
-    endDate: "2025-12-31",
-    rent: "$15,000",
-    sqft: "5,000"
-  },
-  {
-    unit: "Unit 205",
-    status: "Expiring Soon",
-    building: "Westside Tower",
-    address: "456 Oak Ave, Suite 205, New York, NY 10002",
-    startDate: "2022-06-01",
-    endDate: "2025-05-31",
-    rent: "$22,500",
-    sqft: "7,500"
-  },
-  {
-    unit: "Unit 310",
-    status: "Active",
-    building: "Metro Center",
-    address: "789 Park Blvd, Suite 310, New York, NY 10003",
-    startDate: "2024-01-01",
-    endDate: "2027-12-31",
-    rent: "$7,500",
-    sqft: "2,500"
-  }
-];
 
 
   return (
@@ -55,7 +60,7 @@ const TenantDashboard = () => {
             <FloatingSignOut />
             <Container fluid>
               {/* Back */}
-              <div className="back-link d-flex align-items-center gap-2 mb-3" onClick={() => navigate("/dashboard")}>
+              <div className="back-link d-flex align-items-center gap-2 mb-3 text-dark" onClick={() => navigate("/dashboard")}>
                 <ArrowLeft size={16} />
                 <span>Back to Dashboard</span>
               </div>
@@ -66,7 +71,7 @@ const TenantDashboard = () => {
                   <Building2 size={22} />
                 </div>
                 <div>
-                  <div className="tenant-title">{tenantName}</div>
+                  <div className="tenant-title">{tenantName || tenantId}</div>
                   <div className="tenant-subtitle">Tenant Dashboard</div>
                 </div>
               </div>
@@ -86,7 +91,7 @@ const TenantDashboard = () => {
                 <small>Total Units</small>
                 <Building2 size={18} className="kpi-icon purple" />
                 </div>
-                <h4>3</h4>
+                <h4>{leases.length}</h4>
                 <span className="kpi-sub">Occupied units</span>
             </Card.Body>
             </Card>
@@ -99,7 +104,7 @@ const TenantDashboard = () => {
                 <small>Total Sq Ft</small>
                 <MapPin size={18} className="kpi-icon purple" />
                 </div>
-                <h4>15,000</h4>
+            <h4>{totalSqFt.toLocaleString()}</h4>
                 <span className="kpi-sub">Square footage</span>
             </Card.Body>
             </Card>
@@ -112,7 +117,7 @@ const TenantDashboard = () => {
                 <small>Monthly Rent</small>
                 <DollarSign size={18} className="kpi-icon green" />
                 </div>
-                <h4>$45,000</h4>
+            <h4>${totalMonthlyRent.toLocaleString()}</h4>
                 <span className="kpi-sub">Total monthly</span>
             </Card.Body>
             </Card>
@@ -125,7 +130,7 @@ const TenantDashboard = () => {
                 <small>Avg Rent / Sq Ft</small>
                 <TrendingUp size={18} className="kpi-icon blue" />
                 </div>
-                <h4>$3.00</h4>
+            <h4>${avgRentPerSqFt.toFixed(2)}</h4>
                 <span className="kpi-sub">Per square foot</span>
             </Card.Body>
             </Card>
@@ -147,7 +152,7 @@ const TenantDashboard = () => {
       
     <div className="leases-list">
     {leases.map((lease, index) => (
-        <Card key={index} className="unit-card mb-3">
+        <Card key={index} className="unit-card mb-3" onClick={() => navigate(`/lease-details/${lease._id}`)}>
         <Card.Body className="unit-card-body">
 
             {/* TOP ROW */}
@@ -155,33 +160,33 @@ const TenantDashboard = () => {
             {/* LEFT COLUMN */}
             <div className="unit-left">
                 <div className="unit-title">
-                <h6>{lease.unit}</h6>
+                <h6>{lease.unit_number || "Unit 01"}</h6>
                 <span
                     className={`status-badge ${
                     lease.status === "Active" ? "active" : "expiring"
                     }`}
                 >
-                    {lease.status}
+                    {lease.status || "Active"}
                 </span>
                 </div>
 
-                <p className="building">{lease.building}</p>
-                <p className="address">{lease.address}</p>
+                <p className="building">{lease.property_name || "Building A"}</p>
+                <p className="address">{lease.address || "123 Main St"}</p>
             </div>
 
         {/* RIGHT COLUMN */}
         <div className="unit-rent text-end">
             <small>Monthly Rent</small>
-            <h6>{lease.rent}</h6>
-            <span className="sqft">{lease.sqft} sq ft</span>
+            <h6>{lease.monthly_rent || "$0"}</h6>
+            <span className="sqft">{lease.sqft || "0"} sq ft</span>
         </div>
         </div>
 
         {/* DATES */}
         <div className="unit-dates">
-          <span>📅 Start: {lease.startDate}</span>
+          <span>📅 Start: {lease.startDate || "N/A"}</span>
           <span>•</span>
-          <span>📅 End: {lease.endDate}</span>
+          <span>📅 End: {lease.endDate || "N/A"}</span>
         </div>
 
       </Card.Body>
@@ -189,8 +194,18 @@ const TenantDashboard = () => {
   ))}
 </div>
 {showAddUnit && (
-  <AddUnit onClose={() => setShowAddUnit(false)} />
+  <AddUnit
+    show={showAddUnit}
+    tenantId={tenantId}
+    tenantName={tenantName}
+    onClose={() => setShowAddUnit(false)}
+    onSuccess={() => {
+      setShowAddUnit(false);
+      fetchLeases();
+    }}
+  />
 )}
+
 
 
     </Container>

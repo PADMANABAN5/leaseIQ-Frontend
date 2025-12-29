@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import AnalysisSuccess from "./pages/AnalysisSuccess";
@@ -12,26 +13,40 @@ import AiLeaseAssistant from "./components/AiLeaseAssistant";
 import BuildPortfolo from "./pages/BuildPortfolio";
 import Signup from "./pages/Signup";
 
+import PublicRoute from "./components/PublicRoute";
+import PrivateRoute from "./components/PrivateRoute";
+
 
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/landing" element={<Landing />} />
-        <Route path="/analysis-success" element={<AnalysisSuccess />} />
-        <Route path="/lease-details" element={<LeaseDetails />} />
-        <Route path="/units" element={<Unit />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/tenant/:tenantName" element={<TenantDashboard />} />
-        <Route path="/quick-lease-analysis"element={<QuickLeaseAnalysisCard />}/>
-        <Route  path="/quick-analysis-info"  element={<QuickAnalysisInfo />}/>
-        <Route path="/ai-lease-assistant" element={<AiLeaseAssistant />} />
-        <Route path="/build-portfolio" element={<BuildPortfolo />} />
-
+        <Route path="/" element={ <PublicRoute><Login /></PublicRoute>} />
+        <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
+        <Route path="/landing" element={<PrivateRoute><Landing /></PrivateRoute>} />
+        <Route path="/analysis-success" element={<PrivateRoute><AnalysisSuccess /></PrivateRoute>} />
+        <Route path="/lease-details/:leaseId" element={<PrivateRoute><LeaseDetails /></PrivateRoute>} />
+        <Route path="/units" element={<PrivateRoute><Unit /></PrivateRoute>} />
+        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/tenant/:tenantId" element={<PrivateRoute><TenantDashboard /></PrivateRoute>} />
+        <Route path="/quick-lease-analysis" element={<PrivateRoute><QuickLeaseAnalysisCard /></PrivateRoute>} />
+        <Route path="/quick-analysis-info" element={<PrivateRoute><QuickAnalysisInfo /></PrivateRoute>} />
+        <Route path="/ai-lease-assistant" element={<PrivateRoute><AiLeaseAssistant /></PrivateRoute>} />
+        <Route path="/build-portfolio" element={<PrivateRoute><BuildPortfolo /></PrivateRoute>} />
       </Routes>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </BrowserRouter>
   );
 }

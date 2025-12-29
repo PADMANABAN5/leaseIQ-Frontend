@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import {Eye, EyeOff} from "lucide-react";
 import "../styles/login.css";
 import axios from "axios";
+import { showError, showSuccess } from "../service/toast";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const Login = () => {
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -44,10 +45,10 @@ const Login = () => {
     );
 
     sessionStorage.setItem("token", res.data.token);
-
+    showSuccess("Login successful!");
     navigate("/landing");
   } catch (err) {
-    setError(err.response?.data?.message || "Login failed");
+    showError(err.response?.data?.message || "Login failed");
   }
 };
 
@@ -62,7 +63,7 @@ const Login = () => {
       <div className="login-card">
         <h2 className="title text-center">Sign In</h2>
 
-        {error && <p className="error-message">{error}</p>}
+        {/* {error && <p className="error-message">{error}</p>} */}
 
         <Form onSubmit={handleLogin}>
           <Form.Group className="mb-3">

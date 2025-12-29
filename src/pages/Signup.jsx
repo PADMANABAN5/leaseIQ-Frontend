@@ -3,6 +3,7 @@ import { Form, Button, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
+import { showError,showSuccess } from "../service/toast";
 import "../styles/signup.css";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -10,7 +11,6 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 function Signup() {
   const navigate = useNavigate();
 
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -35,7 +35,6 @@ function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    setError("");
 
     try {
       setLoading(true);
@@ -52,9 +51,11 @@ function Signup() {
           headers: { "Content-Type": "application/json" },
         }
       );
+      showSuccess("Signup successful! Please log in.");
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || "Signup failed");
+      const message = err.response?.data?.message || "Signup failed";
+      showError(message);
     } finally {
       setLoading(false);
     }
@@ -69,8 +70,6 @@ function Signup() {
 
       <div className="signup-card">
         <h2 className="title text-center">Sign Up</h2>
-
-        {error && <p className="error-message">{error}</p>}
 
         <Form onSubmit={handleSignup}>
           <Form.Group className="mb-3">
