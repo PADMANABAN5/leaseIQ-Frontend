@@ -1,22 +1,86 @@
 import { useState } from "react";
 import "../styles/addUnitSuite.css";
+import { showError, showSuccess } from "../service/toast";
 
 const AddUnitSuite = ({ data, setData, onBack, onNext }) => {
+  const [errors, setErrors] = useState({});
+const [touched, setTouched] = useState({});
+
   const [unitNumber, setUnitNumber] = useState(data.unitNumber || "");
   const [tenantName, setTenantName] = useState(data.tenantName || "");
   const [squareFootage, setSquareFootage] = useState(data.squareFootage || "");
 
   // ALL required fields validation (same logic as before)
-  const isFormValid = unitNumber.trim() !== "" && tenantName.trim() !== "";
-  const handleContinue = () => {
-    setData({
-      unitNumber,
-      tenantName,
-      squareFootage,
-    });
+  const isFormValid =
+  unitNumber.trim() !== "" &&
+  tenantName.trim() !== "" &&
+  Object.keys(errors).length === 0;
 
-    onNext(); // move to Step 3
-  };
+const handleContinue = () => {
+  const validationErrors = validate();
+  setErrors(validationErrors);
+
+  if (Object.keys(validationErrors).length > 0) {
+    // Show first validation error
+    const firstError = Object.values(validationErrors)[0];
+    showError(firstError);
+    return;
+  }
+
+  // Success toast
+  showSuccess("Unit / Suite details saved successfully!");
+
+  setData({
+    unitNumber,
+    tenantName,
+    squareFootage,
+  });
+
+  onNext();
+};
+
+const handleBlur = (field) => {
+  setTouched((prev) => ({ ...prev, [field]: true }));
+  setErrors(validate());
+};
+
+const validate = () => {
+  const newErrors = {};
+
+  const unit = unitNumber.trim();
+  const tenant = tenantName.trim();
+
+  // UNIT / SUITE VALIDATION
+if (!unit) {
+  newErrors.unitNumber = "Unit / Suite number is required";
+}
+else if (!/\d/.test(unit)) {
+  newErrors.unitNumber = "Unit number must contain at least one number";
+}
+else if (!/^[a-zA-Z0-9\s-]+$/.test(unit)) {
+  newErrors.unitNumber =
+    "Only letters, numbers, spaces and hyphens are allowed";
+}
+
+
+  // TENANT NAME VALIDATION
+  if (!tenant) {
+    newErrors.tenantName = "Tenant name is required";
+  }
+  else if (tenant.length < 3) {
+    newErrors.tenantName = "Tenant name must be at least 3 characters";
+  }
+  else if (!/[a-zA-Z]/.test(tenant)) {
+    newErrors.tenantName = "Tenant name must contain letters";
+  }
+  else if (!/^[a-zA-Z0-9\s.,&'-]+$/.test(tenant)) {
+    newErrors.tenantName =
+      "Only letters, numbers, spaces, and . , & - are allowed";
+  }
+
+  return newErrors;
+};
+
 
   return (
     <div className="add-unit-page-background">
@@ -57,21 +121,33 @@ const AddUnitSuite = ({ data, setData, onBack, onNext }) => {
               Unit/Suite Number <span>*</span>
             </label>
             <input
-              type="text"
-              value={unitNumber}
-              onChange={(e) => setUnitNumber(e.target.value)}
-              placeholder="e.g., Suite 200, Unit A, Floor 3"
-            />
+  type="text"
+  value={unitNumber}
+  onChange={(e) => setUnitNumber(e.target.value)}
+  onBlur={() => handleBlur("unitNumber")}
+  placeholder="e.g., Suite 200, Unit A"
+/>
+
+{touched.unitNumber && errors.unitNumber && (
+  <p className="error-text">{errors.unitNumber}</p>
+)}
+
           </div>
 
           <div className="form-group">
             <label>Tenant Name <span>*</span></label>
             <input
-              type="text"
-              value={tenantName}
-              onChange={(e) => setTenantName(e.target.value)}
-              placeholder="e.g., ACME Corporation"
-            />
+  type="text"
+  value={tenantName}
+  onChange={(e) => setTenantName(e.target.value)}
+  onBlur={() => handleBlur("tenantName")}
+  placeholder="e.g., ACME Corporation"
+/>
+
+{touched.tenantName && errors.tenantName && (
+  <p className="error-text">{errors.tenantName}</p>
+)}
+
           </div>
 
           <div className="form-group">

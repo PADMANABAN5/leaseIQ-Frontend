@@ -119,6 +119,12 @@ background: linear-gradient(to right, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, F
   color: #ffffff;
   cursor: pointer;
 }
+.error-text {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
 
 /* Responsive */
 @media (max-width: 480px) {

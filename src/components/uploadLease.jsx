@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "../styles/uploadLease.css";
 import { useNavigate } from "react-router-dom";
+import { showError, showSuccess } from "../service/toast";
+
 
 const UploadLeaseStep = ({ onBack, onSubmit, loading }) => {
   const [file, setFile] = useState(null);
@@ -9,12 +11,24 @@ const UploadLeaseStep = ({ onBack, onSubmit, loading }) => {
 
   const isFormValid = file && docType;
 
-  const handleUpload = () => {
-    onSubmit({
-      file,
-      docType,
-    });
-  };
+const handleUpload = () => {
+  if (!file) {
+    showError("Please upload a PDF file");
+    return;
+  }
+
+  if (file.type !== "application/pdf") {
+    showError("Only PDF files are allowed");
+    return;
+  }
+
+  showSuccess("Lease document uploaded successfully!");
+
+  onSubmit({
+    file,
+    docType,
+  });
+};
 
   return (
     <div className="upload-lease-page">
