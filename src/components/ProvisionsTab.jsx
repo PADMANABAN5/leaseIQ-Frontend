@@ -187,8 +187,6 @@ const ProvisionsTab = ({
                     className="icon edit"
                     onClick={() => onEditCategory(key)}
                   />
-
-                  <FiTrash2 className="icon delete" />
                 </div>
               </div>
 

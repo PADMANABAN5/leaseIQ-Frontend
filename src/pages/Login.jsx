@@ -45,6 +45,7 @@ const Login = () => {
     );
 
     sessionStorage.setItem("token", res.data.token);
+    sessionStorage.setItem("userId", res.data.user.id);
     showSuccess("Login successful!");
     navigate("/landing");
   } catch (err) {

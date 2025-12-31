@@ -64,7 +64,6 @@ const CamTab = ({
                         onEditRule(rule);
                       }}
                     />
-                    <FiTrash2 className="icon delete" />
                   </div>
                 </div>
 

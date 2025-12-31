@@ -1,18 +1,53 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { showError } from "../service/toast";
+import { useLeaseAnalyzer } from "../service/useLeaseAnalyzer";
+import AnalyzingLease from "./AnalyzingLease";
 import "../styles/quickLease.css";
 
-const QuickLeaseAnalysisCard = ({
-  //file,
-  //onFileChange,
-  leaseName,
-  onLeaseNameChange,
-  onCancel,
-  //onSubmit,
-  //submitDisabled,
-}) => {
-    const navigate = useNavigate();
-    const [uploadedFile, setUploadedFile] = useState(null);
+const QuickLeaseAnalysisCard = () => {
+  const navigate = useNavigate();
+  const { runLeaseAnalysis } = useLeaseAnalyzer();
+
+  const [uploadedFile, setUploadedFile] = useState(null);
+  const [leaseName, setLeaseName] = useState("");
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analyzingStep, setAnalyzingStep] = useState(0);
+
+  const handleAnalyze = async () => {
+    if (!uploadedFile || isAnalyzing) return;
+
+    try {
+      setIsAnalyzing(true);
+      setAnalyzingStep(0);
+
+      const analysisForm = new FormData();
+      analysisForm.append("assets", uploadedFile);
+
+      const leaseDetails = await runLeaseAnalysis({
+        formData: analysisForm,
+        onStepChange: setAnalyzingStep,
+      });
+
+      sessionStorage.setItem(
+        "quickLeaseAnalysis",
+        JSON.stringify({
+          leaseName: String(leaseName || "").trim() || uploadedFile.name,
+          leaseDetails,
+        })
+      );
+
+      navigate("/quick-analysis-info", { state: { source: "quick" } });
+    } catch (err) {
+      console.error(err);
+      showError("Lease analysis failed");
+      setIsAnalyzing(false);
+    }
+  };
+
+  if (isAnalyzing) {
+    return <AnalyzingLease activeStep={analyzingStep} />;
+  }
 
   return (
     <div className="quick-lease-page">
@@ -90,20 +125,23 @@ const QuickLeaseAnalysisCard = ({
               type="text"
               placeholder="e.g. Downtown Office Lease"
               value={leaseName}
-              onChange={(e) => onLeaseNameChange(e.target.value)}
+              onChange={(e) => setLeaseName(e.target.value)}
             />
           </div>
 
           {/* Buttons */}
           <div className="button-row">
-            <button className="btn-cancel" onClick={onCancel}>
+            <button
+              className="btn-cancel"
+              onClick={() => navigate("/landing")}
+            >
               Cancel
             </button>
 
             <button
               className={`btn-upload ${uploadedFile ? "active" : ""}`}
               disabled={!uploadedFile}
-              onClick={() => navigate("/quick-analysis-info", { state: { source: "quick" } })}
+              onClick={handleAnalyze}
             >
               Analyze Lease →
             </button>

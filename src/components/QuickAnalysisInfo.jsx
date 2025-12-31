@@ -12,32 +12,54 @@ import {
 import AiLeaseAssistant from "../components/AiLeaseAssistant";
 import "../styles/QuickAnalysisInfo.css";
 import LeaseMainContent from "../components/LeaseMainContent";
+import FloatingSignOut from "./FloatingSingout";
+import AddToportfolio from "./AddToportfolio";
 
 
 const QuickAnalysisInfo = () => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("Info");
      const [showAiAssistant, setShowAiAssistant] = useState(false);
- 
+     const leaseData = sessionStorage.getItem("quickLeaseAnalysis");
+     const [showAddToPortfolio, setShowAddToPortfolio] = useState(false);
+     //const leaseDetails = leaseData ? JSON.parse(leaseData).leaseDetails : null;
+    const [leaseDetails, setLeaseDetails] = useState(
+  JSON.parse(sessionStorage.getItem("quickLeaseAnalysis") || "{}").leaseDetails || {}
+);
 
+const handleUpdateLeaseDetails = (updatedDetails) => {
+  setLeaseDetails(updatedDetails);
+  const quickLeaseAnalysis = JSON.parse(sessionStorage.getItem("quickLeaseAnalysis") || "{}");
+  quickLeaseAnalysis.leaseDetails = updatedDetails;
+  sessionStorage.setItem("quickLeaseAnalysis", JSON.stringify(quickLeaseAnalysis));
+};
 
   return (
     <>
+    <FloatingSignOut />
     <div className="quick-analysis-info">
-
-      {/* ================= FIXED HEADER ================= */}
       <div className="qai-fixed-header">
-
-        {/* ===== PURPLE HEADER BAR ===== */}
         <div className="qai-header-bar">
           <div className="qai-header-left">
-            <h4>Technology_Strategic_Analysis_2025-12-17</h4>
+            <h4>{leaseData ? JSON.parse(leaseData).leaseName : ""}</h4>
             <p>Analysis complete</p>
           </div>
 
           <div className="qai-header-right">
             <button
-            className="btn btn-light btn-sm"
+              className="btn btn-outline-light btn-sm"
+              onClick={() => setShowAddToPortfolio(true)}
+            >
+              Add to Portfolio
+            </button>
+
+            <AddToportfolio
+              show={showAddToPortfolio}
+              onClose={() => setShowAddToPortfolio(false)}
+              onSuccess={() => setShowAddToPortfolio(false)} 
+            />
+            <button
+            className="btn btn-outline-light btn-sm"
             onClick={() => navigate("/quick-lease-analysis")}
             >
             Analyze Another Lease
@@ -52,8 +74,6 @@ const QuickAnalysisInfo = () => {
             <X className="qai-header-icon" onClick={() => navigate("/landing")} />
           </div>
         </div>
-
-        {/* ===== SUMMARY CARDS ===== */}
         <div className="qai-summary">
           <div className="qai-summary-card">
             <Calendar className="qai-summary-icon blue" />
@@ -84,6 +104,8 @@ const QuickAnalysisInfo = () => {
         <LeaseMainContent
           activeTab={activeTab}
           setActiveTab={setActiveTab}
+          leaseDetails={leaseDetails}
+          onUpdateLeaseDetails={handleUpdateLeaseDetails}
         />
 
     </div>
