@@ -1,0 +1,42 @@
+.base-rent-card {
+  overflow-x: auto;                 
+  -webkit-overflow-scrolling: touch;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+
+  .latefee-grid {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Each card */
+  .latefee-card {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+
+    border-left: 4px solid #5a3df0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+
+    margin-bottom: 12px !important;
+  }
+}
+summary.accordion-summary::after {
+  content: none !important;
+  display: none !important;
+}
+
+summary.accordion-summary::-webkit-details-marker {
+  display: none;
+}
+
+summary.accordion-summary {
+  list-style: none;
+}
+

@@ -1,4 +1,5 @@
 import { FiChevronDown } from "react-icons/fi";
+import "../styles/RentSchedulesTab.css";
 
 const RentSchedulesTab = ({ chargeSchedules, getFieldValue }) => {
   return (

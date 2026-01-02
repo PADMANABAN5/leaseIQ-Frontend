@@ -151,3 +151,22 @@
     font-size: 24px;
   }
 }
+
+
+/* 1/2/2026 */
+
+.button-row {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 400px) {
+  .button-row {
+    flex-direction: column;
+  }
+
+  .btn-upload,
+  .btn-cancel {
+    width: 100%;
+  }
+}
