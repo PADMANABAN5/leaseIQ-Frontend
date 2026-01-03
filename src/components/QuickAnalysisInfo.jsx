@@ -14,6 +14,7 @@ import "../styles/QuickAnalysisInfo.css";
 import LeaseMainContent from "../components/LeaseMainContent";
 import FloatingSignOut from "./FloatingSingout";
 import AddToportfolio from "./AddToportfolio";
+import { deleteLeaseFile } from "../service/leaseFileStore";
 
 
 const QuickAnalysisInfo = () => {
@@ -32,6 +33,21 @@ const handleUpdateLeaseDetails = (updatedDetails) => {
   const quickLeaseAnalysis = JSON.parse(sessionStorage.getItem("quickLeaseAnalysis") || "{}");
   quickLeaseAnalysis.leaseDetails = updatedDetails;
   sessionStorage.setItem("quickLeaseAnalysis", JSON.stringify(quickLeaseAnalysis));
+};
+
+const handleAnalyzeAnotherLease = async () => {
+  try {
+    const stored = JSON.parse(sessionStorage.getItem("quickLeaseAnalysis") || "{}");
+    const fileId = stored?.uploadedFile?.id;
+    if (fileId) {
+      await deleteLeaseFile(fileId);
+    }
+  } catch (e) {
+    console.warn("Failed to cleanup stored lease file", e);
+  } finally {
+    sessionStorage.removeItem("quickLeaseAnalysis");
+    navigate("/quick-lease-analysis");
+  }
 };
 
   return (
@@ -60,7 +76,7 @@ const handleUpdateLeaseDetails = (updatedDetails) => {
             />
             <button
             className="btn btn-outline-light btn-sm"
-            onClick={() => navigate("/quick-lease-analysis")}
+            onClick={handleAnalyzeAnotherLease}
             >
             Analyze Another Lease
             </button>

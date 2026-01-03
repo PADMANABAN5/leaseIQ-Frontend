@@ -129,7 +129,7 @@ const LeaseDetails = () => {
       let derivedLeaseDetails;
       try {
         const debugBody = new FormData();
-        debugBody.append("assets", file); // PDF
+        debugBody.append("assets", file);
         const debugRes = await api.post(
           `${BASE_URL}/api/debug/amendments`,
           debugBody,
@@ -140,13 +140,9 @@ const LeaseDetails = () => {
             },
           }
         );
-
-        // Get the lease_details object from the response
         let rawDetails =
           debugRes?.data?.lease_details ||
           debugRes?.data?.data?.lease_details;
-
-        // If not found, but data exists, use the whole data
         if (!rawDetails && debugRes?.data) {
           rawDetails = debugRes.data;
         }

@@ -3,6 +3,7 @@ import { Form, Button, Modal, Row, Col } from "react-bootstrap";
 import api from "../service/api";
 import "../styles/addUnit.css";
 import { showError, showSuccess } from "../service/toast";
+import { deleteLeaseFile, getLeaseFile } from "../service/leaseFileStore";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -17,11 +18,13 @@ function AddToportfolio({ show, onClose, onSuccess }) {
   const [tenantId, setTenantId] = useState("");
   const [document, setDocument] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const getStoredLeaseData = useCallback(() => {
+    return JSON.parse(sessionStorage.getItem("quickLeaseAnalysis") || "{}");
+  }, []);
   
   // Parse the stored lease analysis data
-  const storedLeaseData = JSON.parse(
-    sessionStorage.getItem("quickLeaseAnalysis") || "{}"
-  );
+  const storedLeaseData = getStoredLeaseData();
   const leaseDetail = storedLeaseData.leaseDetails || {};
   
   const [form, setForm] = useState({
@@ -81,18 +84,43 @@ function AddToportfolio({ show, onClose, onSuccess }) {
   useEffect(() => {
     if (!show) return;
 
-    // Only set document if not already set
-    if (!document && storedLeaseData.uploadedFile?.base64) {
-      const file = base64ToFile(
-        storedLeaseData.uploadedFile.base64,
-        storedLeaseData.uploadedFile.name
-      );
-      if (file) {
-        setDocument(file);
-      } else {
-        showError("Failed to load stored lease file");
+    const loadStoredDocument = async () => {
+      if (document) return;
+
+      const uploaded = getStoredLeaseData().uploadedFile;
+
+      // Preferred path: IndexedDB
+      if (uploaded?.id) {
+        try {
+          const record = await getLeaseFile(uploaded.id);
+          if (record?.blob) {
+            const file = new File([record.blob], record.name || uploaded.name || "lease", {
+              type: record.type || uploaded.type,
+              lastModified: record.lastModified || uploaded.lastModified || Date.now(),
+            });
+            setDocument(file);
+            return;
+          }
+        } catch (e) {
+          console.error("Failed to load lease file from IndexedDB", e);
+        }
+
+        showError("Stored lease file not found. Please re-analyze the lease.");
+        return;
       }
-    }
+
+      // Backward-compatible fallback: base64 stored in sessionStorage
+      if (uploaded?.base64) {
+        const file = base64ToFile(uploaded.base64, uploaded.name);
+        if (file) {
+          setDocument(file);
+        } else {
+          showError("Failed to load stored lease file");
+        }
+      }
+    };
+
+    loadStoredDocument();
 
     // Fetch properties and tenants
     api.get(`${BASE_URL}/api/properties`, {
@@ -102,7 +130,7 @@ function AddToportfolio({ show, onClose, onSuccess }) {
     api.get(`${BASE_URL}/api/tenants`, {
       headers: { Authorization: `Bearer ${token}` },
     }).then(res => setTenants(res.data.data || []));
-  }, [show, token]);
+  }, [show, token, document, getStoredLeaseData]);
 
   useEffect(() => {
     if (!show) resetState();
@@ -187,6 +215,24 @@ function AddToportfolio({ show, onClose, onSuccess }) {
           "Content-Type": "multipart/form-data",
         },
       });
+
+      // Cleanup: remove stored file from IndexedDB after successful upload
+      try {
+        const stored = getStoredLeaseData();
+        const fileId = stored?.uploadedFile?.id;
+        if (fileId) {
+          await deleteLeaseFile(fileId);
+
+          // Remove the reference so we don't try to load a deleted file later
+          const next = { ...stored };
+          if (next.uploadedFile) {
+            delete next.uploadedFile.id;
+          }
+          sessionStorage.setItem("quickLeaseAnalysis", JSON.stringify(next));
+        }
+      } catch (e) {
+        console.warn("Failed to cleanup stored lease file", e);
+      }
 
       showSuccess("Portfolio added successfully");
       onSuccess?.();
